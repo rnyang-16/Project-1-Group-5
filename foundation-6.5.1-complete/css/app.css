@@ -1,0 +1,63 @@
+
+header{
+  position: relative;
+  color:black;
+}
+  body{
+  background: url("images/mfj2zS.jpg") no-repeat center;
+ background-size: 100%;
+ /* position: relative; */
+
+background-position: 0 0; 
+ background-repeat:no-repeat; 
+ background-size: cover;
+}
+
+
+
+.center-container {
+  text-align:center;
+  width:50%;
+}
+h3{
+  color:white;
+}
+.card{
+  display: inline-block;
+  padding: 5px 5px 5px 5px;  
+  color: black;
+  background-color:white;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+/* .thumbnail{
+  padding: .25rem;
+    background-color: #fff;
+    display:block;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    max-width: 50%;
+    height:auto;
+    margin-right: 20px;
+} */
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-right:10px;
+}
+h6{
+  display: block;
+  text-transform: uppercase;
+  text-align:center;
+  color:red;
+  font-weight: 700;
+  /* font-size: 24px; */
+}
+p{
+  margin-bottom:1rem;
+  color:grey;
+  font-size: 0.7rem;
+  font-style: italic;
+ 
+}
