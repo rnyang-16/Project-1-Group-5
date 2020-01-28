@@ -1,6 +1,6 @@
 function searchEats(event){
     console.log("eats!!")
-    document.location.href = "restuarants.html"
+    document.location.href = "restaurant.html"
 }
 
 function searchEvents(event){
