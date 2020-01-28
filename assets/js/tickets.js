@@ -61,7 +61,7 @@ function buildQueryURL() {
       $(".results").append(`<div class="card">
                               <div class="row">
                                   <div class="coloumn-small-4 float-left img-responsive thumbnail">
-                                      <img src="${value.img}"></img>
+                                      <img class="cardImg" src="${value.img}"></img>
                                   </div>
                                   <div class="coloumn-small-8">
                                       <h6>${value.name}</h6>

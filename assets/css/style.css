@@ -21,7 +21,7 @@ body {
   .hero-full-screen .middle-content-section {
     text-align: center;
     color: #fefefe;
-    margin-top: 20%;
+    margin-top: 15%;
   }
 
   /* nav link */
@@ -58,4 +58,12 @@ body {
     left: 0;
     right: 0;
     transition: all 0.5s ease;
+  }
+
+
+  @media only screen and (max-width: 767px) {
+    .menu {
+      flex-direction: column;
+    }
+    
   }

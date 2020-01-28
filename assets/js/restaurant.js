@@ -156,7 +156,7 @@ function addCards(restaurant) {
         $(".results").append(`  <div class="card">
                                     <div class="row">
                                         <div class="coloumn-small-6 float-left img-responsive thumbnail">
-                                            <img src="${value.imageURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS27vqG8i62H8RxLyDKoZCsjqIAWiP26oeaoHfSmUBpRlKRrjEA&s"}"></img>
+                                            <img class="cardImg" src="${value.imageURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS27vqG8i62H8RxLyDKoZCsjqIAWiP26oeaoHfSmUBpRlKRrjEA&s"}"></img>
                                         </div>
                                         <div class="coloumn small-5  center">
                                             <h6>${value.name}</h6>

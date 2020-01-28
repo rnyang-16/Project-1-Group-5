@@ -5,9 +5,9 @@ body {
   }
   
   #eventSearch{
-      background-color:rgba(245,245,245,.66);
+      background-color:rgba(245,245,245,.30);
       /* opacity: 0.5; */
-      border-radius: 5%;
+      /* border-radius: 2%; */
       padding:30px;
   }
   .translucent-form-overlay {
@@ -87,6 +87,13 @@ body {
     right: 0;
     transition: all 0.5s ease;
   }
+
+  
+/* small nav logo */
+#smallLogo {
+  width: 150px;
+  height: 50px;
+}
   
   /* card stlying */
   
@@ -100,7 +107,7 @@ body {
     width: 40%;
     height:20%
   }
-  img {
+  .cardImg {
     width: 150px;
     height: 115px;
   }
@@ -120,8 +127,14 @@ body {
    
   }
   
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 767px) {
     .card {
       width: 50%
+    }  
+    .menu {
+      flex-direction: column;
     }
+    
   }
+
+  

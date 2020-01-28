@@ -16,15 +16,16 @@
 <body>
     <nav class="hover-underline-menu" data-menu-underline-from-center>
       <ul class="menu align-center">
+        <li><img src="assets/images/navlogo.png" alt="eats and events" id="smallLogo"></li>
         <li><a href="index.html">Home</a></li>
-        <li><a href="">Restaurants</a></li>
+        <li><a href="restaurant.html">Restaurants</a></li>
         <li><a href="tickets.html">Events</a></li>
       </ul>
     </nav>
     <div class="results"></div>   
       <div id="eventSearch" class="translucent-form-overlay">
           <form>
-            <h3>Search for Events</h3>
+            <img src="assets/images/searchEvents.png" alt="search events">
             <div class="row columns">
               <label>Keyword
                 <input type="text" id="keyword" placeholder="Any">
@@ -35,12 +36,16 @@
                 </label>
               </div>    
             </div>
-            <button type="button" id="search-button" class="primary button expanded search-button">
-              Search
-            </button>
-            <button type="button" id="location" class="button postfix locationBtn">
-              Near me
-            </button>
+            <div class="row ">
+              <div class="small-6 small-centered text-center columns">
+                <button type="button" id="search-button" class="primary button center search-button">
+                  Search
+                </button>
+                <button type="button" id="location" class="button postfix locationBtn">
+                  Near me
+                </button>
+              </div>
+            </div>
         </div>  
  
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
