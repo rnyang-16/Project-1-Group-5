@@ -7,15 +7,54 @@
 // });
 
 
-// let apikey = "4wDYyinV6ZsMzVdTn2gRFTJQnFyW6euq"
-// let eventOptionsUrl = `https://app.ticketmaster.eu/mfxapi/v2/event.json?apikey=${apikey}&cities?lang&domain&country_id=200`
+// let apikey = "IGvjW5Z2WgDlL9rVeNhyTPrvhM0cn9dU"
+// let eventOptionsUrl = `https://app.ticketmaster.eu/mfxapi/v2/cities?&country_id=840&apikey=${apikey}`
+// let cityOptions = [];
 //   $.ajax({
 //     url: eventOptionsUrl,
 //     method: "GET",
+//     accept: "application/json",
+//   }) .then(function(response){
 
-   
-//   }) 
-//   console.log(eventOptionsUrl)
+//     $.each(response.cities, function(index, value) {
+//       citiesObject = {
+//         name: value.name
+//       }
+//       cityOptions.push(citiesObject); 
+//     })
+
+//     cityOptions.sort(function (a,b){
+//       return a-b
+//       console.log(cityOptions)
+//     })
+//     createCityList(cityOptions);
+//   });
+
+let apikey = "IGvjW5Z2WgDlL9rVeNhyTPrvhM0cn9dU"
+let eventOptionsUrl = `https://app.ticketmaster.eu/mfxapi/v2/cities?&country_id=840&apikey=${apikey}`
+let cityOptions = [];
+  $.ajax({
+    url: eventOptionsUrl,
+    method: "GET",
+    accept: "application/json",
+  }) .then(function(response){
+
+    $.each(response.cities, function(index, value) {
+      cityOptions.push(value.name); 
+    })
+    
+    cityOptions.sort()
+
+    createCityList(cityOptions);
+  });
+
+  function createCityList(cityOptions){
+    console.log(cityOptions)
+    for (let i = 0; i < cityOptions.length; i++){
+      $("#eventOptions").append(`<option value="${cityOptions[i]}">${cityOptions[i]}</option>`);
+    }
+  }
+
 
 function buildQueryURL() {
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?";
@@ -25,11 +64,11 @@ function buildQueryURL() {
     queryParams.keyword = $("#keyword")
       .val()
       .trim();
-  
-    queryParams.city = $("#city")
-      .val()
-      .trim();
-  
+
+    queryParams.city = $("#eventOptions")
+      .val();
+
+    console.log($("#eventOptions").children("option:selected").val())
     // queryParams.location = $("#currentLocation")
     //   .val()
     //   .trim();
@@ -72,30 +111,34 @@ function buildQueryURL() {
             let eventObj = {
                 name: value.name,
                 venue: value._embedded.venues[0].name,
+                date: value.dates.start.localDate,
+                time: value.dates.start.localTime,
                 img: value.images[0].url,
                 link: value.url
             }    
+            let formatDate = moment(eventObj.date).format("MMM D YYYY");
             console.log(eventObj)
-                $("#eventSearch").hide();
-                $(".results").append(`  <div class="card">
-                                                <div class="row">
-                                                    <div class="coloumn-small-4 float-left img-responsive thumbnail">
-                                                        <img src="${value.images[0].url}"></img>
-                                                    </div>
-                                                    <div class="coloumn-small-8">
-                                                        <h6>${value.name}</h6>
-                                                        <p>${value._embedded.venues[0].name}</p>
-                                                        <a href="${value.url}">Get Tickets</a>
-                                                    </div>
-                                                </div>
-                                            </div>`)
-                });
-            
-        })
 
-    
+                $("#eventSearch").hide();
+
+                $(".results").append(`<div class="card">
+                                        <div class="row">
+                                            <div class="coloumn-small-4 float-left img-responsive thumbnail">
+                                                <img src="${value.images[0].url}"></img>
+                                            </div>
+                                            <div class="coloumn-small-8">
+                                                <h6>${value.name}</h6>
+                                                <p>${value._embedded.venues[0].name}</p>
+                                                <p class="eventDate">${formatDate} ${value.dates.start.localTime}</p>
+                                                <a href="${value.url}">Get Tickets</a>
+                                            </div>
+                                        </div>
+                                      </div>`)
+                });
+        })
   });
 
   
   
   $("#clear-all").on("click", clear);
+  $("[data-menu-underline-from-center] a").addClass("underline-from-center");

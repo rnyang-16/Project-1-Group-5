@@ -11,3 +11,5 @@ function searchEvents(event){
 
 $("#eats").on("click", searchEats);
 $("#events").on("click", searchEvents);
+
+$("[data-menu-underline-from-center] a").addClass("underline-from-center");

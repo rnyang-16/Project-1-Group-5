@@ -1,14 +1,17 @@
 body {
-  background: url("event.jpg") center center no-repeat;
+  background: url("../images/eventbackground.jpeg") center center no-repeat fixed;
   background-size: cover;
 }
 
 .translucent-form-overlay {
     max-width: 500px;
     width: 100%;
-    background-color: rgba(247, 239, 239, 0.007);
-    padding: 20px;
-    color: #fefefe;
+    background-color:rgba(245,245,245,.66);
+    border-radius: 5%;
+    padding:30px;
+    /* background-color: rgba(247, 239, 239, 0.007);
+    padding: 20px; */
+    color: black;
     margin: auto;
   }
   
@@ -17,7 +20,7 @@ body {
   }
   
   .translucent-form-overlay h3, .translucent-form-overlay label {
-    color: #fefefe;
+    color: black;
   }
   
   .translucent-form-overlay input, .translucent-form-overlay select {
@@ -94,7 +97,7 @@ h6{
   display: block;
   text-transform: uppercase;
   text-align:center;
-  color:red;
+  color:#1779ba;
   font-weight: 700;
   /* font-size: 24px; */
 }

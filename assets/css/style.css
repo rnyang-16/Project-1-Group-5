@@ -1,5 +1,5 @@
 body {
-    background: url("background.jpg") center center no-repeat;
+    background: url("../images/indexbackground.jpeg") center center no-repeat;
     background-size: cover;
 }
 .hero-full-screen {
@@ -22,4 +22,40 @@ body {
     text-align: center;
     color: #fefefe;
     margin-top: 20%;
+  }
+
+  /* nav link */
+
+  .hover-underline-menu {
+    width: 100%;
+  }
+  
+  .hover-underline-menu .menu {
+    background-color: rgba(54, 54, 54, 0.8);
+    margin-bottom: 5%;
+  }
+  
+  .hover-underline-menu .menu a {
+    color: #fefefe;
+    padding: 1.2rem 1.5rem;
+  }
+  
+  .hover-underline-menu .menu .underline-from-center {
+    position: relative;
+  }
+  
+  .hover-underline-menu .menu .underline-from-center::after {
+    content: "";
+    position: absolute;
+    top: calc(100% - 0.125rem);
+    border-bottom: 0.125rem solid #fefefe;
+    left: 50%;
+    right: 50%;
+    transition: all 0.5s ease;
+  }
+  
+  .hover-underline-menu .menu .underline-from-center:hover::after {
+    left: 0;
+    right: 0;
+    transition: all 0.5s ease;
   }
