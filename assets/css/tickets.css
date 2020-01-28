@@ -6,8 +6,8 @@ body {
 .translucent-form-overlay {
     max-width: 500px;
     width: 100%;
-    background-color:rgba(245,245,245,.66);
-    border-radius: 5%;
+    background-color:rgba(245,245,245,.30);
+    /* border-radius: 2%; */
     padding:30px;
     /* background-color: rgba(247, 239, 239, 0.007);
     padding: 20px; */
@@ -89,7 +89,7 @@ body {
   margin-bottom: 15px;
   width: 35%;
 }
-img {
+.cardImg {
   width: 150px;
   height: 115px;
 }
@@ -109,8 +109,18 @@ p{
  
 }
 
-@media only screen and (max-width: 600px) {
+/* small nav logo */
+#smallLogo {
+  width: 150px;
+  height: 50px;
+}
+
+@media only screen and (max-width: 767px) {
   .card {
     width: 50%
+  }  
+  .menu {
+    flex-direction: column;
   }
+  
 }
