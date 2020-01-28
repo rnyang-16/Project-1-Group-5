@@ -167,6 +167,7 @@ function addCards(restaurant) {
                                 </div>`)
     });
 }
+$("[data-menu-underline-from-center] a").addClass("underline-from-center");
 
 // <div class=conatiner>
 {/* <div class="row">
