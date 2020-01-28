@@ -1,60 +1,3 @@
-// $.ajax({
-//   url: "https://app.ticketmaster.com/discovery/v2/events.json?keyword=soccer&apikey=4wDYyinV6ZsMzVdTn2gRFTJQnFyW6euq",
-//   method: "GET"
-// })
-// .then(function(response){
-//   console.log(response);   
-// });
-
-
-// let apikey = "IGvjW5Z2WgDlL9rVeNhyTPrvhM0cn9dU"
-// let eventOptionsUrl = `https://app.ticketmaster.eu/mfxapi/v2/cities?&country_id=840&apikey=${apikey}`
-// let cityOptions = [];
-//   $.ajax({
-//     url: eventOptionsUrl,
-//     method: "GET",
-//     accept: "application/json",
-//   }) .then(function(response){
-
-//     $.each(response.cities, function(index, value) {
-//       citiesObject = {
-//         name: value.name
-//       }
-//       cityOptions.push(citiesObject); 
-//     })
-
-//     cityOptions.sort(function (a,b){
-//       return a-b
-//       console.log(cityOptions)
-//     })
-//     createCityList(cityOptions);
-//   });
-
-let apikey = "IGvjW5Z2WgDlL9rVeNhyTPrvhM0cn9dU"
-let eventOptionsUrl = `https://app.ticketmaster.eu/mfxapi/v2/cities?&country_id=840&apikey=${apikey}`
-let cityOptions = [];
-  $.ajax({
-    url: eventOptionsUrl,
-    method: "GET",
-    accept: "application/json",
-  }) .then(function(response){
-
-    $.each(response.cities, function(index, value) {
-      cityOptions.push(value.name); 
-    })
-    
-    cityOptions.sort()
-
-    createCityList(cityOptions);
-  });
-
-  function createCityList(cityOptions){
-    console.log(cityOptions)
-    for (let i = 0; i < cityOptions.length; i++){
-      $("#eventOptions").append(`<option value="${cityOptions[i]}">${cityOptions[i]}</option>`);
-    }
-  }
-
 
 function buildQueryURL() {
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?";
@@ -65,28 +8,21 @@ function buildQueryURL() {
       .val()
       .trim();
 
-    queryParams.city = $("#eventOptions")
-      .val();
+    queryParams.city = $("#city")
+      .val()
+      .trim();
 
-    console.log($("#eventOptions").children("option:selected").val())
-    // queryParams.location = $("#currentLocation")
-    //   .val()
-    //   .trim();
-  
-  
     return queryURL + $.param(queryParams);
   }
   
-  function clear() {
-    $("#results").empty();
-  }
+  // function clear() {
+  //   $("#results").empty();
+  // }
   
-  $("#search-button").on("click", function(event) {
-  
+  function searchButtonClick(event) {
     event.preventDefault();
-  
-    clear();
-  
+
+
     var queryURL = buildQueryURL();
     console.log(queryURL);   
   
@@ -96,16 +32,87 @@ function buildQueryURL() {
     })
       .then(function(response){
         console.log(response);
-        // for (i=0; i<response._embedded.events.length; i++) {
-        //   var li_el = $("<li>");
-        //   var link_el = $("<a>");
-        //   link_el.text(response._embedded.events[i].name);
-        //   link_el.attr("href", response._embedded.events[i].url);
-        //   li_el.append(link_el);
-        //   $("#results").append(li_el);
-        // }
-
         let resultsArray = [];
+
+        $.each(response._embedded.events, function (index, value){
+
+          let eventObj = {
+              name: value.name,
+              venue: value._embedded.venues[0].name,
+              date: value.dates.start.localDate,
+              time: value.dates.start.localTime,
+              img: value.images[0].url,
+              link: value.url
+          }    
+          resultsArray.push(eventObj);
+          let formatDate = moment(eventObj.date).format("MMM D YYYY");
+          console.log(eventObj)
+        
+      })
+      createCard(resultsArray)
+      $("#eventSearch").addClass("hide")
+    })
+  };
+  
+  function createCard(tickets){
+    console.log(tickets);
+    $.each(tickets, function(index, value){
+      console.log(value);
+      $(".results").append(`<div class="card">
+                              <div class="row">
+                                  <div class="coloumn-small-4 float-left img-responsive thumbnail">
+                                      <img src="${value.img}"></img>
+                                  </div>
+                                  <div class="coloumn-small-8">
+                                      <h6>${value.name}</h6>
+                                      <p>${value.venue}</p>
+                                      <p class="eventDate"> ${value.time}</p>
+                                      <a href="${value.url}"target="_blank">Get Tickets</a>
+                                  </div>
+                              </div>
+                            </div>`)
+      })
+    };
+  
+  /* Getting The Browser’s Geolocation */
+function getLocation() {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+      var x = document.getElementById("location");
+      x.innerHTML = "Geolocation is not supported.";
+  }
+}
+
+
+function showError(error) {
+  switch(error.code) {
+      case error.PERMISSION_DENIED:
+          x.innerHTML = "User denied the request for Geolocation."
+          break;
+      case error.POSITION_UNAVAILABLE:
+          x.innerHTML = "Location information is unavailable."
+          break;
+      case error.TIMEOUT:
+          x.innerHTML = "The request to get user location timed out."
+          break;
+      case error.UNKNOWN_ERROR:
+          x.innerHTML = "An unknown error occurred."
+          break;
+  }
+}
+
+/* Passing Location To The Discovery API */
+function showPosition(position) {
+  var x = document.getElementById("location");
+  var latlon = position.coords.latitude + "," + position.coords.longitude;
+  $.ajax({
+    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=4wDYyinV6ZsMzVdTn2gRFTJQnFyW6euq&latlong="+latlon,
+    method: "GET" 
+  })
+    .then(function(response){
+      console.log(response);
+      let resultsArrayLocation = [];
 
         $.each(response._embedded.events, function (index, value){
             let eventObj = {
@@ -116,29 +123,20 @@ function buildQueryURL() {
                 img: value.images[0].url,
                 link: value.url
             }    
+            resultsArrayLocation.push(eventObj);
             let formatDate = moment(eventObj.date).format("MMM D YYYY");
-            console.log(eventObj)
+            // console.log(eventObj);
+      })
+      createCard(resultsArrayLocation);
+      $("#eventSearch").addClass("hide");
+  })
+};
 
-                $("#eventSearch").hide();
-
-                $(".results").append(`<div class="card">
-                                        <div class="row">
-                                            <div class="coloumn-small-4 float-left img-responsive thumbnail">
-                                                <img src="${value.images[0].url}"></img>
-                                            </div>
-                                            <div class="coloumn-small-8">
-                                                <h6>${value.name}</h6>
-                                                <p>${value._embedded.venues[0].name}</p>
-                                                <p class="eventDate">${formatDate} ${value.dates.start.localTime}</p>
-                                                <a href="${value.url}">Get Tickets</a>
-                                            </div>
-                                        </div>
-                                      </div>`)
-                });
-        })
-  });
-
+/* Process The API Response */
+$("#location").on("click", function(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(showPosition, showError); 
+});
   
-  
-  $("#clear-all").on("click", clear);
   $("[data-menu-underline-from-center] a").addClass("underline-from-center");
+  $("#search-button").on("click", searchButtonClick);

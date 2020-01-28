@@ -26,19 +26,20 @@
           <form>
             <h3>Search for Events</h3>
             <div class="row columns">
-              <label>
-                <select id="eventOptions">
-                  
-                </select>
-              </label>
-            </div>
-            <div class="row columns">
               <label>Keyword
                 <input type="text" id="keyword" placeholder="Any">
               </label>
+              <div class="row columns">
+                <label>City
+                  <input type="text" id="city" placeholder="Any">
+                </label>
+              </div>    
             </div>
             <button type="button" id="search-button" class="primary button expanded search-button">
               Search
+            </button>
+            <button type="button" id="location" class="button postfix locationBtn">
+              Near me
             </button>
         </div>  
  
