@@ -1,0 +1,61 @@
+body {
+    background: url("../images/indexbackground.jpeg") center center no-repeat;
+    background-size: cover;
+}
+.hero-full-screen {
+    height: 100vh;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  
+  .hero-full-screen .middle-content-section {
+    text-align: center;
+    color: #fefefe;
+    margin-top: 20%;
+  }
+
+  /* nav link */
+
+  .hover-underline-menu {
+    width: 100%;
+  }
+  
+  .hover-underline-menu .menu {
+    background-color: rgba(54, 54, 54, 0.8);
+    margin-bottom: 5%;
+  }
+  
+  .hover-underline-menu .menu a {
+    color: #fefefe;
+    padding: 1.2rem 1.5rem;
+  }
+  
+  .hover-underline-menu .menu .underline-from-center {
+    position: relative;
+  }
+  
+  .hover-underline-menu .menu .underline-from-center::after {
+    content: "";
+    position: absolute;
+    top: calc(100% - 0.125rem);
+    border-bottom: 0.125rem solid #fefefe;
+    left: 50%;
+    right: 50%;
+    transition: all 0.5s ease;
+  }
+  
+  .hover-underline-menu .menu .underline-from-center:hover::after {
+    left: 0;
+    right: 0;
+    transition: all 0.5s ease;
+  }
