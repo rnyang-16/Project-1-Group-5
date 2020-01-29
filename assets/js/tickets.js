@@ -1,63 +1,62 @@
 
 function buildQueryURL() {
-    var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?";
+  var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?";
+  var queryParams = {"apikey":"4wDYyinV6ZsMzVdTn2gRFTJQnFyW6euq"};
+
+  queryParams.keyword = $("#keyword")
+    .val()
+    .trim();
+
+  queryParams.city = $("#city")
+    .val()
+    .trim();
+
+  return queryURL + $.param(queryParams);
+}
   
-    var queryParams = {"apikey":"4wDYyinV6ZsMzVdTn2gRFTJQnFyW6euq"};
-  
-    queryParams.keyword = $("#keyword")
-      .val()
-      .trim();
+function searchButtonClick(event) {
+  event.preventDefault();
+  var queryURL = buildQueryURL();
+  console.log(queryURL);   
+  $("#ticketErrorMsg").empty()
 
-    queryParams.city = $("#city")
-      .val()
-      .trim();
-
-    return queryURL + $.param(queryParams);
-  }
-  
-  // function clear() {
-  //   $("#results").empty();
-  // }
-  
-  function searchButtonClick(event) {
-    event.preventDefault();
-
-
-    var queryURL = buildQueryURL();
-    console.log(queryURL);   
-  
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    })
-      .then(function(response){
-        console.log(response);
-        let resultsArray = [];
-
-        $.each(response._embedded.events, function (index, value){
-
-          let eventObj = {
-              name: value.name,
-              venue: value._embedded.venues[0].name,
-              date: value.dates.start.localDate,
-              time: value.dates.start.localTime,
-              img: value.images[0].url,
-              link: value.url
-          }    
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+  .then(function(response){
+    console.log(response);
+    let resultsArray = [];
+    if(response._embedded){
+      $.each(response._embedded.events, function (index, value){
+        let eventObj = {
+          name: value.name,
+          venue: value._embedded.venues[0].name,
+          date: value.dates.start.localDate,
+          time: value.dates.start.localTime,
+          img: value.images[0].url,
+          link: value.url
+        }    
           resultsArray.push(eventObj);
           let formatDate = moment(eventObj.date).format("MMM D YYYY");
           console.log(eventObj)
-        
       })
       createCard(resultsArray)
       $("#eventSearch").addClass("hide")
-    })
-  };
+    }
+    else {
+      $("#ticketErrorMsg").text("Please enter a valid city & Event Type!")
+    }
+
+  })
+};
   
   function createCard(tickets){
     console.log(tickets);
     $.each(tickets, function(index, value){
       console.log(value);
+      var formattedDate=moment(value.date).format("dddd, MMMM Do YYYY");
+      var formattedTime=moment(value.time, "HH:mm:ss").format(" h:mm A");
       $(".results").append(`<div class="card">
                               <div class="row">
                                   <div class="coloumn-small-4 float-left img-responsive thumbnail">
@@ -65,9 +64,9 @@ function buildQueryURL() {
                                   </div>
                                   <div class="coloumn-small-8">
                                       <h6>${value.name}</h6>
-                                      <p>${value.venue}</p>
-                                      <p class="eventDate"> ${value.time}</p>
-                                      <a href="${value.url}"target="_blank">Get Tickets</a>
+                                      <p><b>WHERE: </b>${value.venue}</p>
+                                      <p class="eventDate"><b>WHEN : </b> ${formattedDate} at ${formattedTime} </p>
+                                      <a href="${value.link}"target="_blank">Get Tickets</a>
                                   </div>
                               </div>
                             </div>`)
@@ -122,10 +121,12 @@ function showPosition(position) {
                 time: value.dates.start.localTime,
                 img: value.images[0].url,
                 link: value.url
-            }    
+            }   
+            //changes
+          //  let formatDate=moment(eventObj.date).format("dddd, MMMM Do YYYY");
+          //   console.log(moment(eventObj.time, "HH:mm:ss").format(" h:mm A"))
             resultsArrayLocation.push(eventObj);
-            let formatDate = moment(eventObj.date).format("MMM D YYYY");
-            // console.log(eventObj);
+           
       })
       createCard(resultsArrayLocation);
       $("#eventSearch").addClass("hide");

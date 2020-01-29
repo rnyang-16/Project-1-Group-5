@@ -87,7 +87,8 @@ body {
   border-radius: 4px;
   margin: auto;
   margin-bottom: 15px;
-  width: 35%;
+  width: 40%;
+  height:20%
 }
 .cardImg {
   width: 150px;
@@ -103,10 +104,20 @@ h6{
 }
 p{
   margin-bottom:1rem;
+  margin-left:11rem;
   color:grey;
-  font-size: 0.7rem;
-  font-style: italic;
+  font-size: 0.8rem;
+  /* font-style: italic; */
  
+}
+#ticketErrorMsg{
+  color:#800000;
+  font-size: 0.9rem;
+  font-weight:bold;
+}
+a{
+  margin-left:1rem;
+
 }
 
 /* small nav logo */
@@ -123,4 +134,9 @@ p{
     flex-direction: column;
   }
   
+}
+@media only screen and (max-width: 500px) {
+  p {
+      margin-left:0px;
+  }
 }

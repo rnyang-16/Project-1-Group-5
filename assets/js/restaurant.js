@@ -76,7 +76,8 @@ function getLocation(latitude,longitude){
                 imageURL:value.restaurant.thumb,
                 adress:value.restaurant.location.address,
                 menu:value.restaurant.menu_url,
-                cousines:value.restaurant.cuisines
+                cousines:value.restaurant.cuisines,
+                rating:value.restaurant.user_rating.aggregate_rating,
             };
             myrestaurantArray.push(myrestaurant);
             console.log(myrestaurantArray);
@@ -95,6 +96,7 @@ $(".searchButton").on("click",function(events){
     var userCategory=$("#selectOptions").val().trim();
     var userCategoryId=$("#selectOptions")[0].selectedOptions[0].attributes[0].value; // categoty ID
     console.log(userCategoryId);
+    $("#errorMessage").empty();
 
     var searchCityIDURL="https://developers.zomato.com/api/v2.1/cities?q="+userCity;
 
@@ -106,10 +108,15 @@ $(".searchButton").on("click",function(events){
             "Accept":"application/json"
         }
     }).then(function(response){
-        console.log(response);
-        cityID= response.location_suggestions[0].id;  // City ID
-        console.log(cityID);
-        searchCityFunction(userCategoryId,cityID);
+        if(response.location_suggestions.length>0){
+            console.log(response);
+            cityID= response.location_suggestions[0].id;  // City ID
+            console.log(cityID);
+            searchCityFunction(userCategoryId,cityID);
+        }
+        else{
+            $("#errorMessage").text("Please enter a valid city !")
+        }
     })
 })
 
@@ -136,7 +143,8 @@ function searchCityFunction(userCategoryId,cityID){
                 imageURL:value.restaurant.thumb,
                 adress: value.restaurant.location.address,
                 menu:value.restaurant.menu_url,
-                cousines:value.restaurant.cuisines
+                cousines:value.restaurant.cuisines,
+                rating:value.restaurant.user_rating.aggregate_rating,
             }
             searchResultsArray.push(resultObj)
             console.log(searchResultsArray);
@@ -158,14 +166,16 @@ function addCards(restaurant) {
                                         <div class="coloumn-small-6 float-left img-responsive thumbnail">
                                             <img class="cardImg" src="${value.imageURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS27vqG8i62H8RxLyDKoZCsjqIAWiP26oeaoHfSmUBpRlKRrjEA&s"}"></img>
                                         </div>
-                                        <div class="coloumn small-5  center">
-                                            <h6>${value.name}</h6>
+                                        <div class="coloumn small-5  center" id="content">
+                                          <a href="${value.url}" target="_blank" text-uppercase"><h6>${value.name}</h6></a>
                                             <p>${value.adress}</p>
-                                            <p id=> <b>cuisines:</b>${value.cousines}</p>
+                                            <p id="cousineID"> <b>cuisines :   </b>${value.cousines}</p>
+                                            <span id="ratingId"> &#9733;</span>
+                                            <span>${value.rating}</span>
                                         </div>
                                     </div>
                                 </div>`)
-    });
+                            });
 }
 $("[data-menu-underline-from-center] a").addClass("underline-from-center");
 
