@@ -119,15 +119,28 @@ body {
     font-weight: 700;
     /* font-size: 24px; */
   }
+  #content{
+    margin-left:10px;
+}
   p{
     margin-bottom:1rem;
+    margin-left:10rem;
     color:grey;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-style: italic;
    
   }
-  
-  @media only screen and (max-width: 767px) {
+  #ratingId{
+    margin-left:1rem;
+    font-size: 18px;
+    color:grey;
+   }
+   #errorMessage{
+     color:#800000;
+     font-size: 0.9rem;
+     font-weight:bold;
+   }
+@media only screen and (max-width: 767px) {
     .card {
       width: 50%
     }  
@@ -135,6 +148,11 @@ body {
       flex-direction: column;
     }
     
+  }
+  @media only screen and (max-width: 500px) {
+    p {
+        margin-left:0px;
+    }
   }
 
   
