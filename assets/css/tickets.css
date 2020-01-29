@@ -1,0 +1,126 @@
+body {
+  background: url("../images/eventbackground.jpeg") center center no-repeat fixed;
+  background-size: cover;
+}
+
+.translucent-form-overlay {
+    max-width: 500px;
+    width: 100%;
+    background-color:rgba(245,245,245,.30);
+    /* border-radius: 2%; */
+    padding:30px;
+    /* background-color: rgba(247, 239, 239, 0.007);
+    padding: 20px; */
+    color: black;
+    margin: auto;
+  }
+  
+  .translucent-form-overlay .columns.row {
+    display: block;
+  }
+  
+  .translucent-form-overlay h3, .translucent-form-overlay label {
+    color: black;
+  }
+  
+  .translucent-form-overlay input, .translucent-form-overlay select {
+    color: #8a8a8a;
+  }
+  
+  .translucent-form-overlay input::-webkit-input-placeholder {
+    color: #8a8a8a;
+  }
+  
+  .translucent-form-overlay input:-ms-input-placeholder {
+    color: #8a8a8a;
+  }
+  
+  .translucent-form-overlay input::placeholder {
+    color: #8a8a8a;
+  }
+  
+  
+
+  /* nav bar */
+
+  
+.hover-underline-menu {
+  width: 100%;
+}
+
+.hover-underline-menu .menu {
+  background-color: rgba(54, 54, 54, 0.8);
+  margin-bottom: 5%;
+}
+
+.hover-underline-menu .menu a {
+  color: #fefefe;
+  padding: 1.2rem 1.5rem;
+}
+
+.hover-underline-menu .menu .underline-from-center {
+  position: relative;
+}
+
+.hover-underline-menu .menu .underline-from-center::after {
+  content: "";
+  position: absolute;
+  top: calc(100% - 0.125rem);
+  border-bottom: 0.125rem solid #fefefe;
+  left: 50%;
+  right: 50%;
+  transition: all 0.5s ease;
+}
+
+.hover-underline-menu .menu .underline-from-center:hover::after {
+  left: 0;
+  right: 0;
+  transition: all 0.5s ease;
+}
+
+/* card stlying */
+
+.card{
+  padding: 5px 5px 5px 5px;  
+  color: black;
+  background-color:white;
+  border-radius: 4px;
+  margin: auto;
+  margin-bottom: 15px;
+  width: 35%;
+}
+.cardImg {
+  width: 150px;
+  height: 115px;
+}
+h6{
+  display: block;
+  text-transform: uppercase;
+  text-align:center;
+  color:#1779ba;
+  font-weight: 700;
+  /* font-size: 24px; */
+}
+p{
+  margin-bottom:1rem;
+  color:grey;
+  font-size: 0.7rem;
+  font-style: italic;
+ 
+}
+
+/* small nav logo */
+#smallLogo {
+  width: 150px;
+  height: 50px;
+}
+
+@media only screen and (max-width: 767px) {
+  .card {
+    width: 50%
+  }  
+  .menu {
+    flex-direction: column;
+  }
+  
+}
