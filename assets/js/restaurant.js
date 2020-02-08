@@ -37,7 +37,7 @@ var categoriesOption=[];
 
 $(".locationBtn").on("click",function(events){
     event.preventDefault();
-    $.get("https://api.ipdata.co?api-key=test", function(response) {
+    $.get("https://api.ipdata.co?api-key=d5862679c66dcba67c49248d83c5e242af5cfa6321d2bd188e5e5d77", function(response) {
         console.log(response);
         var ipAdress=response.ip;
         var city=response.city;
